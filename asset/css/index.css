@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka&family=Lexend+Giga&family=Poppins&display=swap');
+
+
+/*
+------------------------------
+            INDEX
+------------------------------
+*/
+
+.primer-div {
+    position: sticky;
+    top: 0;
+    background-color: #ffffff;
+    z-index: 999;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.logo-col{
+    width: 350px;
+}
+
+.logo-text{
+    margin-top: 20px;
+    margin-bottom: 30px;
+    margin-left: 30px;
+    text-align: center;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: 0.325em;
+    color: #000000;
+    }
+    
+.logo{  
+    height: 54px;
+    padding: 0px;
+    margin-top: 10px;
+    background: url(../image/logo.svg) no-repeat center;
+}
+
+.about-col, .contact-col{
+    padding-top: 20px;
+}
+
+.about, .contact{
+    text-align: center;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+    color: #000000;
+    text-decoration: none;
+}
+
+.session-col{
+    text-align: center;
+}
+
+.session{
+    width: 350px;
+    height: 60px;
+    background-image: linear-gradient(to bottom, #8772B1, #b29ad8);
+    float: right;
+    border-bottom-left-radius: 20px;
+    padding: 0;
+}
+
+.login,.register{
+    margin-top: 18px;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+}
+
+.login-a,.register-a, .home-a, .logout-a{
+    color: #ffff;
+    text-decoration: none;
+}
+
+.login-a:hover,.register-a:hover, .home-a:hover, .logout-a:hover{
+    color: #ffff;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.separate{
+    width: auto;
+    height: 40px;
+    background: #a591ce;
+    margin-top: 10px;
+    padding: 2px;
+}
+
+.section-1{
+    height: 500px;
+    padding: 0;
+}
+
+.section-1-right{
+    background-color: #e7dbff88;
+    padding: 0;
+    margin-bottom: 50px;
+}
+
+.slogan{
+    display: flex;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 45px;
+    line-height: 60px;
+    letter-spacing: 0.325em;
+    color: #000000;
+    margin-top: 150px;
+    margin-left: 100px;
+    padding: 0;
+}
+
+.container-section-1-right{
+    height: 90%;
+    width: 98%;
+    margin-top: 25px;
+    margin-left: 15px;
+    background-color: #dbc8ffa2;
+}
+
+.footer{
+    padding-top: 20px;
+}
+
+.rights{
+    padding-left: 70px;
+}
+
+.socials{
+    padding-left: 50px;
+}
+
+.x,.youtube,.instagram{
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 20px;
+    background-color: #8e75c2;
+    margin-left: 10px;
+}
+
+.x{
+    background-image: url(../image/x.png);
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: center;
+}
+
+.youtube{
+    background-image: url(../image/youtube.png);
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: center;
+}
+
+.instagram{
+    background-image: url(../image/instagram.png);
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: center;
+}
+
+.option-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+  
+.options {
+    width: 350px;
+    height: 250px;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: #dbc8ffa2 solid 1.5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Lexend Giga', sans-serif;
+    color: #000000;
+}
+
+.title-option{
+    font-weight:bolder;
+    margin-top: 10px;
+}
+
+.text-option{
+    margin-top: 8px;
+    font-size: 12px;
+}
