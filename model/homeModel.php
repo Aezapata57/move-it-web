@@ -6,9 +6,11 @@
             require_once('../../config/db.php');
             $pdo = new db();
             $this->PDO = $pdo->conexion();
-        } 
-        public function agregarNuevoUsuario($nombre, $apellidos, $email, $telefono, $ciudad, $contraseña, $fecha, $cc, $tipo, $token, $verificado){
-            $statement = $this->PDO->prepare("INSERT INTO datas VALUES(null, :NAMES, :SURNAMES, :EMAIL, :PHONE, :CITY, :PASSWORD, :DATE, :CC, :TYPE, :TOKEN, :VERIFICADO)");
+        }
+        
+        //---------------------------REGISTRO---------------------------------//
+        public function agregarNuevoUsuario($nombre, $apellidos, $email, $telefono, $ciudad, $contraseña, $fecha, $cc, $tipo, $token, $verificado, $intentos, $ultimo_intento){
+            $statement = $this->PDO->prepare("INSERT INTO datas VALUES(null, :NAMES, :SURNAMES, :EMAIL, :PHONE, :CITY, :PASSWORD, :DATE, :CC, :TYPE, :TOKEN, :VERIFICADO, :INTENTOS, :ULTIMO_INTENTO)");
             $statement->bindParam(":NAMES",$nombre);
             $statement->bindParam(":SURNAMES",$apellidos);
             $statement->bindParam(":EMAIL",$email);
@@ -20,6 +22,8 @@
             $statement->bindParam(":TYPE",$tipo);
             $statement->bindParam(":TOKEN",$token);
             $statement->bindParam(":VERIFICADO",$verificado);
+            $statement->bindParam(":INTENTOS",$intentos);
+            $statement->bindParam(":ULTIMO_INTENTO",$ultimo_intento);
             try {
                 $statement->execute();
                 return true;
@@ -27,12 +31,8 @@
                 return false;
             }
         }   
-        
-        // ...
 
         public function verificarRegistroEmail($email) {
-
-            // Consulta para verificar si el correo, cédula o número telefónico ya está registrado
             $statement = $this->PDO->prepare("SELECT * FROM datas WHERE EMAIL = :EMAIL;");
             $statement->bindParam(":EMAIL",$email);
 
@@ -46,8 +46,6 @@
             }
         }
         public function verificarRegistroCC($cc) {
-
-            // Consulta para verificar si el correo, cédula o número telefónico ya está registrado
             $statement = $this->PDO->prepare("SELECT * FROM datas WHERE CC = :CC;");
             $statement->bindParam(":CC",$cc);
 
@@ -61,8 +59,6 @@
             }
         }
         public function verificarRegistroTelefono($telefono) {
-
-            // Consulta para verificar si el correo, cédula o número telefónico ya está registrado
             $statement = $this->PDO->prepare("SELECT * FROM datas WHERE PHONE = :PHONE;");
             $statement->bindParam(":PHONE",$telefono);
 
@@ -76,9 +72,9 @@
             }
         }
 
-        
+        //---------------------------VERIFICAR-REGISTRO---------------------------------//
         public function validarToken($token) {
-            $statement = $this->PDO->prepare("UPDATE datas SET VERIFICADO = 1 WHERE TOKEN = :TOKEN");
+            $statement = $this->PDO->prepare("UPDATE datas SET VERIFICADO = 1 AND TIEMPO = 0 WHERE TOKEN = :TOKEN");
             $statement->bindParam(':TOKEN', $token, PDO::PARAM_STR);
             try {
                 $statement->execute();
@@ -87,7 +83,8 @@
                 return false;
             }
         }
-        
+       
+        //---------------------------INICIO DE SESION---------------------------------//
         public function obtenerclave($email){
             $statement = $this->PDO->prepare("SELECT PASSWORD FROM datas WHERE :EMAIL = EMAIL");
             $statement->bindParam(":EMAIL",$email);
@@ -108,19 +105,116 @@
             }
         }
 
-        public function guardarLockoutTime($email, $lockout_time) {
-            $statement = $this->PDO->prepare("UPDATE datas SET lockout_time = :LOCKOUT_TIME WHERE EMAIL = :EMAIL");
-            $statement->bindParam(":LOCKOUT_TIME", $lockout_time);
+        //---------------------------BLOQUEO---------------------------------//
+
+        public function actualizarIntentos($email, $intentos, $ultimoIntento) {
+            $statement = $this->PDO->prepare("UPDATE datas SET INTENTOS = :INTENTOS, ULTIMO_INTENTO = :ULTIMO_INTENTO WHERE EMAIL = :EMAIL");
+            $statement->bindParam(":INTENTOS", $intentos, PDO::PARAM_INT);
+            $statement->bindParam(":ULTIMO_INTENTO", $ultimoIntento);
             $statement->bindParam(":EMAIL", $email);
+            return $statement->execute();
+        }
+
+        public function obtenerDatosIntentos($email) {
+            $statement = $this->PDO->prepare("SELECT INTENTOS, ULTIMO_INTENTO FROM datas WHERE EMAIL = :EMAIL");
+            $statement->bindParam(":EMAIL", $email);
+            $statement->execute();
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        }
+
+ 
+        //------------------------------RECUPERACION-TOKEN------------------------------//
+
+        public function generarTokenRecuperacion($email) {
+            $token = bin2hex(random_bytes(16));
         
-            try {
-                $statement->execute();
-                $_SESSION['lockout_time_db'] = $lockout_time;
-                return true;
-            } catch (PDOException $e) {
-                return false;
+            $currentDateTime = new DateTime("now", new DateTimeZone('America/Bogota'));
+            $expiracionDateTime = $currentDateTime->modify('+24 hours');
+        
+            $expiracion = $expiracionDateTime->format("Y-m-d H:i:s");
+        
+            $statement = $this->PDO->prepare("UPDATE datas SET RECUPERACION_TOKEN = :TOKEN, RECUPERACION_EXPIRACION = :EXPIRACION WHERE EMAIL = :EMAIL");
+            $statement->bindParam(":TOKEN", $token);
+            $statement->bindParam(":EXPIRACION", $expiracion);
+            $statement->bindParam(":EMAIL", $email);
+            $statement->execute();
+        
+            return $token;
+        }
+                
+        public function verificarTokenRecuperacion($token) {
+            $statement = $this->PDO->prepare("SELECT * FROM datas WHERE RECUPERACION_TOKEN = :TOKEN AND RECUPERACION_EXPIRACION > NOW()");
+            $statement->bindParam(":TOKEN", $token);
+            $statement->execute();
+        
+            return $statement->rowCount() > 0;
+        }
+        
+        public function obtenerEmailPorTokenRecuperacion($token) {
+            $statement = $this->PDO->prepare("SELECT EMAIL FROM datas WHERE RECUPERACION_TOKEN = :TOKEN AND RECUPERACION_EXPIRACION > NOW()");
+            $statement->bindParam(":TOKEN", $token);
+            $statement->execute();
+        
+            return $statement->fetch(PDO::FETCH_COLUMN);
+        }
+
+        //------------------------------RECUPERACION-CONTRASEÑA------------------------------//
+        
+        public function actualizarContraseñaYTokenRecuperacion($email, $nuevaContraseña) {
+            $contraseñasAnteriores = $this->obtenerUltimasContraseñas($email, 5);
+        
+            foreach ($contraseñasAnteriores as $contraseñaAnterior) {
+                if (password_verify($nuevaContraseña, $contraseñaAnterior)) {
+                    $error = "<li>La contraseña nueva no puede ser una de las últimas 5 contraseñas que has utilizado.</li>";
+                    header("Location: ../user/reset_password.php?token=" . $_POST["token"] . "&error=" . $error);
+                    exit();
+                }
             }
+
+            $hashNewPassword = password_hash($nuevaContraseña, PASSWORD_DEFAULT);
+            $this->guardarContraseñaAnterior($email, $hashNewPassword);
+        
+            $statement = $this->PDO->prepare("UPDATE datas SET PASSWORD = :PASSWORD, RECUPERACION_TOKEN = NULL, RECUPERACION_EXPIRACION = NULL WHERE EMAIL = :EMAIL");
+            $statement->bindParam(":PASSWORD", $hashNewPassword);
+            $statement->bindParam(":EMAIL", $email);
+            $statement->execute();
         }        
+        
+        public function obtenerUltimasContraseñas($email, $cantidad = 5) {
+            $statement = $this->PDO->prepare("SELECT PASSWORD FROM contraseñas_anteriores WHERE EMAIL = :EMAIL ORDER BY FECHA DESC LIMIT :CANTIDAD");
+            $statement->bindParam(":EMAIL", $email);
+            $statement->bindParam(":CANTIDAD", $cantidad, PDO::PARAM_INT);
+            $statement->execute();
+        
+            $contraseñasAnteriores = [];
+            foreach ($statement->fetchAll(PDO::FETCH_COLUMN) as $contraseñaAnterior) {
+                $contraseñasAnteriores[] = $contraseñaAnterior;
+            }
+        
+            return $contraseñasAnteriores;
+        }
+
+        public function guardarContraseñaAnterior($email, $hashContraseña) {
+            $statement = $this->PDO->prepare("INSERT INTO contraseñas_anteriores VALUES (:EMAIL, :PASSWORD, NOW())");
+            $statement->bindParam(":EMAIL", $email);
+            $statement->bindParam(":PASSWORD", $hashContraseña);
+            $statement->execute();
+        }
+
+        //---------------------------------------------------------------------------//
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public function reporte($nombre, $problema, $comentario, $telefono){
             $statement = $this->PDO->prepare("INSERT INTO contacts VALUES(null, :NAMES, :PROBLEM, :COMENT, :PHONE)");

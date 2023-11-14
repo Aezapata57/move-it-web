@@ -18,6 +18,8 @@ $cc = $_POST["CC"];
 $tipo = $_POST["TYPE"];
 $token = bin2hex(random_bytes(16));
 $verificado = "0";
+$intentos = "";
+$ultimo_intento = "";
 $error = "";
 
 if ($contraseña == $confirmarContraseña) {
@@ -37,9 +39,9 @@ if ($contraseña == $confirmarContraseña) {
     } else if($registradoTelefono){
         $error .= "<li>El número telefónico ya están registrados</li>";
         header("Location:signup.php?error=" . $error);
-    }else {
+    }else{
         // El usuario no está registrado
-        $obj->guardarUsuario($nombre, $apellidos, $email, $telefono, $ciudad, $contraseña, $fecha, $cc, $tipo, $token, $verificado);
+        $obj->guardarUsuario($nombre, $apellidos, $email, $telefono, $ciudad, $contraseña, $fecha, $cc, $tipo, $token, $verificado, $intentos, $ultimo_intento);
         // Generar un token de verificación
         $verificationLink = "http://localhost/login/view/user/verificar.php?token=" . $token;
 

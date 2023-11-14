@@ -6,36 +6,12 @@
             require_once('../../model/homeModel.php');
             $this->MODEL = new homeModel();
         }
-        //---------USUARIO---------//
-        public function guardarUsuario($nombre, $apellidos, $email, $telefono, $ciudad, $contraseña, $fecha, $cc, $tipo, $token, $verificado) {
-            $valor = $this->MODEL->agregarNuevoUsuario($nombre, $apellidos, $this->limpiarcorreo($email), $telefono, $ciudad, $this->encriptarcontraseña($this->limpiarcadena($contraseña)), $fecha, $cc, $tipo, $token, $verificado);
+        //---------------------------REGISTRO---------------------------------//
+        public function guardarUsuario($nombre, $apellidos, $email, $telefono, $ciudad, $contraseña, $fecha, $cc, $tipo, $token, $verificado, $intentos, $ultimo_intento) {
+            $valor = $this->MODEL->agregarNuevoUsuario($nombre, $apellidos, $this->limpiarcorreo($email), $telefono, $ciudad, $this->encriptarcontraseña($this->limpiarcadena($contraseña)), $fecha, $cc, $tipo, $token, $verificado, $intentos, $ultimo_intento);
             return $valor;
         }
 
-        public function verificarEmail($email){
-            $result = $this->MODEL->verificarRegistroEmail($email);
-            return $result;
-        }
-        public function verificarCC($cc){
-            $result = $this->MODEL->verificarRegistroCC($cc);
-            return $result;
-        }
-        public function verificarTelefono($telefono){
-            $result = $this->MODEL->verificarRegistroTelefono($telefono);
-            return $result;
-        }
-        
-        public function verificarToken(): bool {
-            if (isset($_GET['token'])) {
-                $token = $_GET['token'];
-                $result = $this->MODEL->validarToken($token);
-        
-                return $result;
-            } else {
-                return false;
-            }
-        }
-    
         public function limpiarcadena($campo){
             $campo = strip_tags($campo);
             $campo = filter_var($campo, FILTER_UNSAFE_RAW);
@@ -51,6 +27,33 @@
         public function encriptarcontraseña($contraseña){
             return password_hash($contraseña,PASSWORD_DEFAULT);
         }
+
+        public function verificarEmail($email){
+            $result = $this->MODEL->verificarRegistroEmail($email);
+            return $result;
+        }
+        public function verificarCC($cc){
+            $result = $this->MODEL->verificarRegistroCC($cc);
+            return $result;
+        }
+        public function verificarTelefono($telefono){
+            $result = $this->MODEL->verificarRegistroTelefono($telefono);
+            return $result;
+        }
+
+        //---------------------------VERIFICAR-REGISTRO---------------------------------//
+        public function verificarToken(): bool {
+            if (isset($_GET['token'])) {
+                $token = $_GET['token'];
+                $result = $this->MODEL->validarToken($token);
+        
+                return $result;
+            } else {
+                return false;
+            }
+        }
+
+        //---------------------------INICIO DE SESION---------------------------------//
         public function verificarusuario($email,$contraseña){
             $keydb = $this->MODEL->obtenerclave($email);
             return (password_verify($contraseña, $keydb)) ? $keydb : false;
@@ -61,11 +64,52 @@
             return $result;
         }
 
-        public function guardartiempo($email, $lockout_time){
-            $result = $this->MODEL->guardarLockoutTime($email, $lockout_time);
-            return $result;
+        //-----------------------------BLOQUEO---------------------------------//
+
+        public function actualizarIntentos($email, $intentos, $ultimoIntento) {
+            return $this->MODEL->actualizarIntentos($email, $intentos, $ultimoIntento);
         }
 
+        public function obtenerDatosIntentos($email) {
+            return $this->MODEL->obtenerDatosIntentos($email);
+        }
+
+
+        //------------------------------RECUPERACION-TOKEN------------------------------//
+
+        public function generarTokenRecuperacion($email){
+            return $this->MODEL->generarTokenRecuperacion($email);
+        }
+
+        public function VerificarTokenRecuperacion($token){
+            return $this->MODEL->VerificarTokenRecuperacion($token);
+        }
+
+        public function obtenerEmailPorTokenRecuperacion($token) {
+            $statement = $this->MODEL->obtenerEmailPorTokenRecuperacion($token);
+            return $statement;
+        }
+
+        //------------------------------RECUPERACION-CONTRASEÑA------------------------------//
+
+        public function actualizarContraseñaYTokenRecuperacion($email, $contraseña) {
+            $this->MODEL->actualizarContraseñaYTokenRecuperacion($email, $contraseña);
+        }
+
+        //-----------------------------------------------------------------//
+
+
+
+
+
+
+
+
+
+
+
+
+        
         public function show(){
             return ($this->MODEL->show()) ? $this->MODEL->show() : false;
         }

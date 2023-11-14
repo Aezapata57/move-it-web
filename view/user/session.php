@@ -3,48 +3,49 @@
 
     session_start();
 
-    if (!isset($_SESSION['login_attempts'])) {
-        $_SESSION['login_attempts'] = 0;
-    }
-
-    $_SESSION['login_attempts']++;
-
-    $lockout_time = 24 * 60 * 60;
-
-    if ($_SESSION['login_attempts'] >= 5) {
-        $_SESSION['lockout_time'] = time() + $lockout_time;
-        $_SESSION['login_attempts'] = 0;
-    }
-
-    if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
-        $remaining_time = $_SESSION['lockout_time'] - time();
-
-        $hours = floor($remaining_time / 3600);
-        $minutes = floor(($remaining_time % 3600) / 60);
-
-        $error = "<li>La cuenta ha sido bloqueada. Intenta nuevamente después de $hours horas y $minutes minutos.</li>";
-        header("Location:login.php?error=".$error);
-        exit();
-    } 
-
     $obj = new homeController();
     $email = $obj->limpiarcorreo($_POST["EMAIL"]);
     $contraseña = $obj->limpiarcadena($_POST["PASSWORD"]);
 
-    $bandera = $obj->verificarusuario($email,$contraseña);
+    // Obtener datos de intentos antes de la verificación del usuario
+    $datosIntentos = $obj->obtenerDatosIntentos($email);
+ 
+    // Verificar si el usuario está bloqueado debido a demasiados intentos fallidos
+    $intentosMaximos = 5;
+    $tiempoBloqueo = 24 * 60 * 60; // 24 horas en segundos
 
-    if($bandera) {
+    if ($datosIntentos['INTENTOS'] >= $intentosMaximos && strtotime($datosIntentos['ULTIMO_INTENTO']) > (time() - $tiempoBloqueo)) {
+        // Calcular el tiempo restante hasta que el usuario pueda intentar iniciar sesión nuevamente
+        $tiempoRestante = $tiempoBloqueo - (time() - strtotime($datosIntentos['ULTIMO_INTENTO']));
+        
+        // Formatear el tiempo restante en horas, minutos y segundos
+        $tiempoRestanteFormateado = gmdate("H:i:s", $tiempoRestante);
+    
+        $error = "<li>Demasiados intentos fallidos. Inténtalo nuevamente en: $tiempoRestanteFormateado.</li>";
+        header("Location:login.php?error=" . $error);
+        exit();
+    }
+
+    // Verificación del usuario
+    $bandera = $obj->verificarusuario($email, $contraseña);
+
+    // Después de la verificación del usuario
+    $intentos = ($bandera) ? 0 : $datosIntentos['INTENTOS'] + 1;
+    $ultimoIntento = date("Y-m-d H:i:s");
+
+    $obj->actualizarIntentos($email, $intentos, $ultimoIntento);
+
+    if ($bandera) {
         $result = $obj->validarVerificacion($email);
-
-        if($result) {      
+        if ($result) {
             $_SESSION['datas'] = $email;
             header("Location:panel_control.php");
         } else {
             $error = "<li>El correo electrónico no ha sido verificado.</li>";
-            header("Location:login.php?error=".$error);
+            header("Location:login.php?error=" . $error);
         }
     } else {
         $error = "<li>La contraseña y/o el correo electrónico no son correctos, por favor comprueba.</li>";
-        header("Location:login.php?error=".$error);
+        header("Location:login.php?error=" . $error);
     }
 ?>

@@ -47,7 +47,7 @@
                                 <?php endif;?>               
                                 <div class="text-center pt-1 mb-2 pb-1">
                                     <button class="iniciar-sesion mb-3" type="submit">Iniciar sesión</button>
-                                    <a class="text-muted password" href="#!">¿Olvidaste tu contraseña?</a>
+                                    <a class="text-muted password" href="recover.php">¿Olvidaste tu contraseña?</a>
                                 </div>
                 
                                 <div class="d-flex align-items-center justify-content-center pb-4">
