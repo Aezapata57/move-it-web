@@ -7,8 +7,8 @@
     define('SMTP_SECURE', 'ssl'); // Opciones: '', 'ssl', 'tls'
 
     // Dirección de correo electrónico del remitente
-    define('EMAIL_FROM', 'tu_correo@localhost');
-    define('EMAIL_NAME', 'Tu Nombre');
+    define('EMAIL_FROM', 'move.it.corp.2023@gmail.com');
+    define('EMAIL_NAME', 'MOVE-IT');
 
     // Configuración de la API de Google Maps
     define('API_KEY', 'AIzaSyDYl1UOXedon5rpWbXbSbQI1YDO81eJtLU');
