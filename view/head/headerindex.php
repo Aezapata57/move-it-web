@@ -31,7 +31,7 @@
                 <?php else: ?>
                     <div class="row session">
                         <div class="col login">
-                            <a href="view/user/panel_control.php" class="home-a">Home</a>
+                            <a href="view/client/panel_control_client.php" class="home-a">Ir al inicio</a>
                         </div>
                         <div class="col-2 separate"></div>
                         <div class="col register">

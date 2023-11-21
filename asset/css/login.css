@@ -174,3 +174,8 @@
 .text{
     font-family: 'Lexend Giga', sans-serif;
 }
+
+.facebook:hover{
+    background-color: white;
+    color: #0D6EFD;
+}

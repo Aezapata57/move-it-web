@@ -7,11 +7,9 @@ $obj = new homeController();
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["token"])) {
     $token = $_GET["token"];
 
-    // Verificar si el token de recuperación es válido
     $validToken = $obj->verificarTokenRecuperacion($token);
 
     if ($validToken) {
-        // Token válido, mostrar el formulario para restablecer la contraseña
         ?>
         <!DOCTYPE html>
         <html lang="en">
@@ -70,7 +68,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["token"])) {
         header("Location: recover.php?error=". $error);
     }
 } else {
-    // Manejar el acceso no autorizado o redirigir según sea necesario
     header("Location: login.php");
     exit();
 }

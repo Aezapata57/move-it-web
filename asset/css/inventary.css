@@ -1,0 +1,373 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka&family=Lexend+Giga&family=Poppins&display=swap');
+
+
+/*
+------------------------------
+            INDEX
+------------------------------
+*/
+
+.primer-div {
+    position: sticky;
+    top: 0;
+    background-color: #ffffff;
+    z-index: 999;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.logo-col{
+    width: 350px;
+}
+
+.logo-text{
+    margin-top: 20px;
+    margin-bottom: 30px;
+    margin-left: 30px;
+    text-align: center;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: 0.325em;
+    color: #000000;
+    }
+    
+.logo{  
+    height: 54px;
+    padding: 0px;
+    margin-top: 10px;
+    background: url(../image/logo.svg) no-repeat center;
+}
+
+.service-col{
+    padding-top: 20px;
+}
+
+.settings-col{
+    padding-top: 25px;
+}
+
+.settings, .service{
+    text-align: center;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+    text-decoration: none;
+}
+
+.settings{
+    color: #000000;
+}
+
+.service{
+    color: #8772B1;
+    font-size: 25px;
+}
+
+.session-col{
+    text-align: center;
+}
+
+.session{
+    width: 200px;
+    height: 60px;
+    background-image: linear-gradient(to bottom, #8772B1, #b29ad8);
+    float: right;
+    border-bottom-left-radius: 20px;
+    padding: 0;
+}
+
+.login,.register{
+    margin-top: 18px;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+}
+
+.login-a,.register-a, .home-a, .logout-a{
+    color: #ffff;
+    text-decoration: none;
+}
+
+.login-a:hover,.register-a:hover, .home-a:hover, .logout-a:hover{
+    color: #ffff;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.separate{
+    width: auto;
+    height: 40px;
+    background: #a591ce;
+    margin-top: 10px;
+    padding: 2px;
+}
+
+.section-1{
+    height: 500px;
+    padding: 0;
+}
+
+.section-1-right{
+    background-color: #e7dbff88;
+    padding: 0;
+    margin-bottom: 50px;
+}
+
+.slogan{
+    display: flex;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 45px;
+    line-height: 60px;
+    letter-spacing: 0.325em;
+    color: #000000;
+    margin-top: 150px;
+    margin-left: 100px;
+    padding: 0;
+}
+
+.container-section-1-right{
+    height: 90%;
+    width: 98%;
+    margin-top: 25px;
+    margin-left: 15px;
+    background-color: #dbc8ffa2;
+}
+
+.footer{
+    padding-top: 20px;
+}
+
+.rights{
+    padding-left: 70px;
+}
+
+
+.option-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+  
+.options {
+    width: 350px;
+    height: 250px;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: #dbc8ffa2 solid 1.5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Lexend Giga', sans-serif;
+    color: #000000;
+}
+
+.title-option{
+    font-weight:bolder;
+    margin-top: 10px;
+}
+
+.text-option{
+    margin-top: 8px;
+    font-size: 12px;
+}
+
+.home{
+    text-decoration: none;
+}
+
+.container-1{
+    background-color: #e7dbff88;
+    padding: 20px;
+}
+.container-2{
+    background-color: #dbc8ffa2;
+    padding: 20px;
+}
+
+.gradient {
+    background: linear-gradient(to right, #cec3e0, #8772B1);
+}
+
+.input{
+    background-color: #bbbbbb9c;
+    border-radius: 0px;
+    height: 50px;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 25px;
+    letter-spacing: 0.10em;
+    padding-left: 30px;
+}
+
+.CC{
+    background-color: #bbbbbb9c;
+    border-radius: 0px;
+    height: 50px;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 25px;
+    letter-spacing: 0.10em;
+    padding-left: 15px;
+    padding-top: 12px;
+    color: #6918B4;
+}
+
+.separate{
+    width: auto;
+    height: 50px;
+    background: #a591ce;
+    padding: 1px;
+}
+
+.registrarse, .next{
+    background: linear-gradient(to right, #bca7df, #8772B1);
+    border-radius: 0px;
+    width: 100%;
+    height: 50px;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 25px;
+    letter-spacing: 0.10em;
+    border: 0px;
+
+    color: #000000;
+}
+.registrarse:hover, .next:hover{
+    background: linear-gradient(to right, #8772B1, #bca7df);
+    color: #000000;
+}
+
+.next{
+    padding-top: 10px;
+}
+
+.conditions{
+    text-align: justify;
+    text-decoration: none;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+    font-size: 13px;
+}
+
+.new-login-1{
+    left: 149px;
+    top: 748px;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 25px;
+    color: #000000;
+}
+
+.new-login-2{
+    left: 149px;
+    top: 748px;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 25px;
+    color:#6918B4;
+    text-decoration: none;
+}
+
+.new-login-2:hover{
+    left: 149px;
+    top: 748px;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 25px;
+    color:#440f75;
+    text-decoration: none;
+}
+
+.error{
+    margin-top: -25px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.article{
+    margin: 0 auto;
+    display: fixed;
+    width: 550px;
+    align-items: center;
+    text-align: center;
+}
+
+.separate_inventory{
+    background-color: #817F80;
+    margin: 0 auto;
+    display: fixed;
+    width: 550px;
+    height: 2px;
+    align-items: center;
+    text-align: center;
+}
+
+.title_inventory{
+    margin: 0 auto;
+    display: fixed;
+    width: 550px;
+    margin-top: 30px;
+    align-items: center;
+    text-align: center;
+}
+
+.text_title_inventory{
+    font-family: 'Lexend Giga', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.agregar{
+    margin: 0 auto;
+    display: fixed;
+    width: 550px;
+    margin-top: 20px;
+    align-items: center;
+    text-align: center;
+}
+
+.text{
+    margin: 0 auto;
+    display: fixed;
+    width: 550px;
+    margin-top: 10px;
+    align-items: center;
+    text-align: center;
+}
+
+.tabla_container{
+    margin: 0 auto;
+    display: fixed;
+    width: 850px;
+    margin-top: 10px;
+    align-items: center;
+    text-align: center;
+}
+
+.map{
+    border-radius: 20px;
+    margin: 0 auto;
+    display: fixed;
+    height: 350px;
+    width: 550px;
+    margin-top: 10px;
+    align-items: center;
+    text-align: center;
+}

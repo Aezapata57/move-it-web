@@ -7,8 +7,8 @@
             $this->MODEL = new homeModel();
         }
         //---------------------------REGISTRO---------------------------------//
-        public function guardarUsuario($nombre, $apellidos, $email, $telefono, $ciudad, $contraseña, $fecha, $cc, $tipo, $token, $verificado, $intentos, $ultimo_intento) {
-            $valor = $this->MODEL->agregarNuevoUsuario($nombre, $apellidos, $this->limpiarcorreo($email), $telefono, $ciudad, $this->encriptarcontraseña($this->limpiarcadena($contraseña)), $fecha, $cc, $tipo, $token, $verificado, $intentos, $ultimo_intento);
+        public function guardarUsuario($nombre, $apellidos, $email, $telefono, $ciudad, $contraseña, $fecha, $cc, $tipo, $token, $verificado, $intentos, $ultimo_intento, $recuperacion_token, $recuperacion_expiracion) {
+            $valor = $this->MODEL->agregarNuevoUsuario($nombre, $apellidos, $this->limpiarcorreo($email), $telefono, $ciudad, $this->encriptarcontraseña($this->limpiarcadena($contraseña)), $fecha, $cc, $tipo, $token, $verificado, $intentos, $ultimo_intento, $recuperacion_token, $recuperacion_expiracion);
             return $valor;
         }
 
@@ -64,6 +64,11 @@
             return $result;
         }
 
+        public function RecogerTipo($email){
+            $result = $this->MODEL->leerTipo($email);
+            return $result;
+        }
+
         //-----------------------------BLOQUEO---------------------------------//
 
         public function actualizarIntentos($email, $intentos, $ultimoIntento) {
@@ -98,8 +103,21 @@
 
         //-----------------------------------------------------------------//
 
+        public function crearTabla($email) {
+            $this->MODEL->crearTabla($email);
+        }
 
+        public function obtenerDatosTabla($email){
+            return $this->MODEL->obtenerDatosTabla($email);
+        }
 
+        public function guardarArticulos($email, $tipo, $opciones, $cantidad){
+            $this->MODEL->guardarArticulos($email, $tipo, $opciones, $cantidad);
+        }
+
+        public function eliminarArticulo($id, $email){
+            $this->MODEL->eliminarArticulo($id, $email);
+        }
 
 
 

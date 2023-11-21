@@ -20,6 +20,8 @@ $token = bin2hex(random_bytes(16));
 $verificado = "0";
 $intentos = "";
 $ultimo_intento = "";
+$recuperacion_token = "";
+$recuperacion_expiracion = "";
 $error = "";
 
 if ($contraseña == $confirmarContraseña) {
@@ -41,7 +43,7 @@ if ($contraseña == $confirmarContraseña) {
         header("Location:signup.php?error=" . $error);
     }else{
         // El usuario no está registrado
-        $obj->guardarUsuario($nombre, $apellidos, $email, $telefono, $ciudad, $contraseña, $fecha, $cc, $tipo, $token, $verificado, $intentos, $ultimo_intento);
+        $obj->guardarUsuario($nombre, $apellidos, $email, $telefono, $ciudad, $contraseña, $fecha, $cc, $tipo, $token, $verificado, $intentos, $ultimo_intento, $recuperacion_token, $recuperacion_expiracion);
         // Generar un token de verificación
         $verificationLink = "http://localhost/login/view/user/verificar.php?token=" . $token;
 

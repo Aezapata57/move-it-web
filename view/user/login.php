@@ -1,7 +1,7 @@
 <?php
     require_once("../head/head.php");
     if(!empty($_SESSION['datas'])){
-        header("Location:panel_control.php");
+        header("Location:../../index.php");
     }
 ?>
 
@@ -56,36 +56,22 @@
                                 </div>
                             </form>
                         <div class="text-center">
-                            <span class="text">Ó inicia sesión con:</span>
+                            <span class="text">Ó registrate usando:</span>
                         </div>
                         <!-- LOGIN CON REDES SOCIALES -->
                         <div class="container w-100 mt-2 mb-3">
                             <div class="row text-center">
-                                <div class="row">
-                                    <div class="col">
-                                        <button onclick="onLogin();" class='btn btn-outline-primary w-100 my-1 mx-2'>
-                                            <div class="row align-items-center">
-                                                <div class="col-2">
-                                                    <img src="../../asset/image/Facebook.png" width="30px" alt="">
-                                                </div>
-                                                <div class="col-10 text-center">
-                                                    Facebook
-                                                </div>
+                                <div class="col">
+                                    <button onclick="onLogin();" class='btn btn-primary facebook w-100 my-1 mx-2'>
+                                        <div class="row align-items-center">
+                                            <div class="col-2">
+                                                <img src="../../asset/image/Facebook.png" width="30px" alt="">
                                             </div>
-                                        </button>
-                                    </div>
-                                    <div class="col">
-                                        <button class='btn btn-outline-danger w-100 my-1 mx-2'>
-                                            <div class="row align-items-center">
-                                                <div class="col-2">
-                                                    <img src="../../asset/image/Google.png" width="30px" alt="">
-                                                </div>
-                                                <div class="col-10 text-center">
-                                                    Google
-                                                </div>
+                                            <div class="col-10 text-center">
+                                                <b>Tu cuenta de Facebook</b>
                                             </div>
-                                        </button>
-                                    </div>
+                                        </div>
+                                    </button>
                                 </div>
                             </div>
                         </div>

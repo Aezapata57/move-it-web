@@ -1,24 +1,19 @@
 <?php
     require_once("../../controller/homeController.php");
-
-    session_start();
+    require_once("../user/session_started.php");
 
     $obj = new homeController();
     $email = $obj->limpiarcorreo($_POST["EMAIL"]);
     $contraseña = $obj->limpiarcadena($_POST["PASSWORD"]);
 
-    // Obtener datos de intentos antes de la verificación del usuario
     $datosIntentos = $obj->obtenerDatosIntentos($email);
- 
-    // Verificar si el usuario está bloqueado debido a demasiados intentos fallidos
+
     $intentosMaximos = 5;
-    $tiempoBloqueo = 24 * 60 * 60; // 24 horas en segundos
+    $tiempoBloqueo = 24 * 60 * 60;
 
     if ($datosIntentos['INTENTOS'] >= $intentosMaximos && strtotime($datosIntentos['ULTIMO_INTENTO']) > (time() - $tiempoBloqueo)) {
-        // Calcular el tiempo restante hasta que el usuario pueda intentar iniciar sesión nuevamente
         $tiempoRestante = $tiempoBloqueo - (time() - strtotime($datosIntentos['ULTIMO_INTENTO']));
         
-        // Formatear el tiempo restante en horas, minutos y segundos
         $tiempoRestanteFormateado = gmdate("H:i:s", $tiempoRestante);
     
         $error = "<li>Demasiados intentos fallidos. Inténtalo nuevamente en: $tiempoRestanteFormateado.</li>";
@@ -26,10 +21,8 @@
         exit();
     }
 
-    // Verificación del usuario
     $bandera = $obj->verificarusuario($email, $contraseña);
 
-    // Después de la verificación del usuario
     $intentos = ($bandera) ? 0 : $datosIntentos['INTENTOS'] + 1;
     $ultimoIntento = date("Y-m-d H:i:s");
 
@@ -39,7 +32,12 @@
         $result = $obj->validarVerificacion($email);
         if ($result) {
             $_SESSION['datas'] = $email;
-            header("Location:panel_control.php");
+            $type = $obj->RecogerTipo($email);
+            if ($type == 'Cliente') {
+                header("Location:../client/panel_control_client.php");
+            }else if($type == "Conductor"){
+                header("Location:../driver/panel_control_driver.php");
+            }
         } else {
             $error = "<li>El correo electrónico no ha sido verificado.</li>";
             header("Location:login.php?error=" . $error);

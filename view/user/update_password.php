@@ -1,5 +1,4 @@
 <?php
-// update_password.php
 
 require_once("../../controller/homeController.php");
 require_once("../../config/config.php");
@@ -11,19 +10,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["token"]) && isset($_PO
     $newPassword = $_POST["PASSWORD"];
     $confirmPassword = $_POST["CONFIRM"];
 
-    // Verificar si las contraseñas coinciden
     if ($newPassword === $confirmPassword) {
-        // Verificar si el token de recuperación es válido
+        
         $validToken = $obj->verificarTokenRecuperacion($token);
 
         if ($validToken) {
-            // Obtener el email asociado al token
             $email = $obj->obtenerEmailPorTokenRecuperacion($token);
 
-            // Guardar la nueva contraseña y actualizar el token de recuperación
             $obj->actualizarContraseñaYTokenRecuperacion($email, $newPassword);
 
-            // Redirigir al usuario a la página de inicio de sesión o mostrar un mensaje de éxito
             header("Location: login.php");
             exit();
         } else {
@@ -36,7 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["token"]) && isset($_PO
         exit();
     }
 } else {
-    // Manejar el acceso no autorizado o redirigir según sea necesario
     header("Location: login.php");
     exit();
 }

@@ -9,4 +9,9 @@
     // Dirección de correo electrónico del remitente
     define('EMAIL_FROM', 'tu_correo@localhost');
     define('EMAIL_NAME', 'Tu Nombre');
+
+    // Configuración de la API de Google Maps
+    define('API_KEY', 'AIzaSyDYl1UOXedon5rpWbXbSbQI1YDO81eJtLU');
+    define('API_SECRET', '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');
+
 ?>

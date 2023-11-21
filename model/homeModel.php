@@ -9,8 +9,8 @@
         }
         
         //---------------------------REGISTRO---------------------------------//
-        public function agregarNuevoUsuario($nombre, $apellidos, $email, $telefono, $ciudad, $contraseña, $fecha, $cc, $tipo, $token, $verificado, $intentos, $ultimo_intento){
-            $statement = $this->PDO->prepare("INSERT INTO datas VALUES(null, :NAMES, :SURNAMES, :EMAIL, :PHONE, :CITY, :PASSWORD, :DATE, :CC, :TYPE, :TOKEN, :VERIFICADO, :INTENTOS, :ULTIMO_INTENTO)");
+        public function agregarNuevoUsuario($nombre, $apellidos, $email, $telefono, $ciudad, $contraseña, $fecha, $cc, $tipo, $token, $verificado, $intentos, $ultimo_intento, $recuperacion_token, $recuperacion_expiracion){
+            $statement = $this->PDO->prepare("INSERT INTO datas VALUES(null, :NAMES, :SURNAMES, :EMAIL, :PHONE, :CITY, :PASSWORD, :DATE, :CC, :TYPE, :TOKEN, :VERIFICADO, :INTENTOS, :ULTIMO_INTENTO, :RECUPERACION_TOKEN, :RECUPERACION_EXPIRACION)");
             $statement->bindParam(":NAMES",$nombre);
             $statement->bindParam(":SURNAMES",$apellidos);
             $statement->bindParam(":EMAIL",$email);
@@ -24,6 +24,8 @@
             $statement->bindParam(":VERIFICADO",$verificado);
             $statement->bindParam(":INTENTOS",$intentos);
             $statement->bindParam(":ULTIMO_INTENTO",$ultimo_intento);
+            $statement->bindParam(":RECUPERACION_TOKEN",$recuperacion_token);
+            $statement->bindParam(":RECUPERACION_EXPIRACION",$recuperacion_expiracion);
             try {
                 $statement->execute();
                 return true;
@@ -103,6 +105,13 @@
             } catch (PDOException $e) {
                 return false;
             }
+        }
+
+        public function leerTipo($email){
+            $statement = $this->PDO->prepare("SELECT TYPE FROM datas WHERE EMAIL = :EMAIL;");
+            $statement->bindParam(":EMAIL",$email);
+            $statement->execute();
+            return $statement->fetch()["TYPE"];
         }
 
         //---------------------------BLOQUEO---------------------------------//
@@ -203,8 +212,66 @@
 
         //---------------------------------------------------------------------------//
 
+        public function crearTabla($email) {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                return false;
+            }
+        
+            $query = "CREATE TABLE `$email` (
+                `ID` int(3) NOT NULL AUTO_INCREMENT,
+                `TIPO` varchar(20) NOT NULL,
+                `ARTICULO` varchar(40) NOT NULL,
+                `CANTIDAD` int(3) NOT NULL,
+                PRIMARY KEY (`ID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+        
+            try {
+                $statement = $this->PDO->prepare($query);
+                $statement->execute();
+                return true;
+            } catch (PDOException $e) {
+                return false;
+            }
+        }
+        
+        public function obtenerDatosTabla($email) {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                return false;
+            }
 
+            $query = "SELECT * FROM `$email`";
+            $statement = $this->PDO->prepare($query);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
 
+        public function guardarArticulos($email, $tipo, $opciones, $cantidad){
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                return false;
+            }
+
+            $query = "INSERT INTO `$email` VALUES(null, :TIPO, :OPCIONES, :CANTIDAD)";
+            $statement = $this->PDO->prepare($query);
+            $statement->bindParam(":TIPO", $tipo);
+            $statement->bindParam(":OPCIONES", $opciones);
+            $statement->bindParam(":CANTIDAD", $cantidad);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+
+        public function eliminarArticulo($id, $email) {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                return false;
+            }
+            
+            $query = "DELETE FROM `$email` WHERE ID = :ID";
+            $statement = $this->PDO->prepare($query);
+            $statement->bindParam(":ID", $id);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
 
 
 

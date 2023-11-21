@@ -1,10 +1,10 @@
 <?php 
 
-    require_once("../../model/homeModel.php");
+    require_once("../../controller/homeController.php");
     require_once("../../config/config.php");
 
-    $obj = new homeModel();
+    $obj = new homeController();
 
-    print_r($obj->obtenerUltimasContraseñas("rapidplase@gmail.com"));
+    echo($obj->RecogerTipo("rapidplase@gmail.com"));
 
 ?>

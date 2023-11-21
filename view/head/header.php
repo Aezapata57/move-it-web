@@ -15,13 +15,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Productos</a>
+                            
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Precios</a>
+                            
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contactanos</a>
+                           
                         </li>
                     </ul>
                     <a href="login.php" class="boton">Inicia Session</a>
@@ -31,13 +31,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="show.php">Ver usuarios registrados</a>
+                            
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../support/show_p.php">Ver problemas de los usuarios</a>
+                            
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../service/show.php">Ver solicitudes de servicios</a>
+                            
                         </li>
                     </ul>
                     <a href="logout.php" class="boton">Cerrar Sesion</a>
