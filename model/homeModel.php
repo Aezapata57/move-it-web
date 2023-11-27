@@ -274,7 +274,123 @@
         }
 
 
+        public function tablaExiste($email) {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                return false;
+            }
+        
+            $query = "SHOW TABLES LIKE :email";
+            $statement = $this->PDO->prepare($query);
+            $statement->bindParam(":email", $email);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+        
+            return ($result !== false); // Si la tabla existe, devuelve true; de lo contrario, devuelve false.
+        }
 
+        
+
+
+
+
+
+
+
+        public function verificarDireccionEmail($email) {
+            $statement = $this->PDO->prepare("SELECT * FROM details WHERE EMAIL = :EMAIL;");
+            $statement->bindParam(":EMAIL",$email);
+
+            try {
+                $statement->execute();
+                $result = $statement->fetchAll();
+
+                return count($result) > 0;
+            } catch (PDOException $e) {
+                return false;
+            }
+        }
+
+        public function recogerOrigen($email){
+            $statement = $this->PDO->prepare("SELECT ORIGEN FROM details WHERE EMAIL = :EMAIL;");
+            $statement->bindParam(":EMAIL",$email);
+            $statement->execute();
+            return $statement->fetch()["ORIGEN"];
+        }
+
+        public function recogerDestino($email){
+            $statement = $this->PDO->prepare("SELECT DESTINO FROM details WHERE EMAIL = :EMAIL;");
+            $statement->bindParam(":EMAIL",$email);
+            $statement->execute();
+            return $statement->fetch()["DESTINO"];
+        }
+
+        public function recogerFecha($email){
+            $statement = $this->PDO->prepare("SELECT FECHA FROM details WHERE EMAIL = :EMAIL;");
+            $statement->bindParam(":EMAIL",$email);
+            $statement->execute();
+            return $statement->fetch()["FECHA"];
+        }
+
+        public function recogerHora($email){
+            $statement = $this->PDO->prepare("SELECT HORA FROM details WHERE EMAIL = :EMAIL;");
+            $statement->bindParam(":EMAIL",$email);
+            $statement->execute();
+            return $statement->fetch()["HORA"];
+        }
+
+        public function guardarDirecciones($email, $origen, $destino, $fecha, $hora, $verificado){
+            $statement = $this->PDO->prepare("INSERT INTO details VALUES(null, :EMAIL, :ORIGEN, :DESTINO, :FECHA, :HORA, :VERIFICADO)");
+            $statement->bindParam(":EMAIL",$email);
+            $statement->bindParam(":ORIGEN",$origen);
+            $statement->bindParam(":DESTINO",$destino);
+            $statement->bindParam(":FECHA",$fecha);
+            $statement->bindParam(":HORA",$hora);
+            $statement->bindParam(":VERIFICADO",$verificado);
+            try {
+                $statement->execute();
+                return true;
+            } catch (PDOException $e) {
+                return false;
+            }
+        }
+
+        public function actualizarDirecciones($email, $origen, $destino){
+            $statement = $this->PDO->prepare("UPDATE details SET ORIGEN = :ORIGEN, DESTINO = :DESTINO WHERE EMAIL = :EMAIL");
+            $statement->bindParam(":EMAIL",$email);
+            $statement->bindParam(":ORIGEN",$origen);
+            $statement->bindParam(":DESTINO",$destino);
+            try {
+                $statement->execute();
+                return true;
+            } catch (PDOException $e) {
+                return false;
+            }
+        }
+
+        public function guardarFechaHora($email, $fecha, $hora){
+            $statement = $this->PDO->prepare("UPDATE details SET FECHA = :FECHA, HORA = :HORA WHERE EMAIL = :EMAIL");
+            $statement->bindParam(":EMAIL",$email);
+            $statement->bindParam(":FECHA",$fecha);
+            $statement->bindParam(":HORA",$hora);
+            try {
+                $statement->execute();
+                return true;
+            } catch (PDOException $e) {
+                return false;
+            }
+        }
+
+        public function traerArticulos($email) {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                return false;
+            }
+
+            $query = "SELECT ARTICULO, CANTIDAD FROM `$email`";
+            $statement = $this->PDO->prepare($query);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
 
 
 

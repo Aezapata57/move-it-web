@@ -28,13 +28,16 @@ $datosTabla = $obj->obtenerDatosTabla($email);
 </head>
 
 <body>
+    <div class="overlay">
+        <div class="loader"></div>
+    </div>
     <div class="container-fluid">
         <div class="title_inventory row">
             <p class="text_title_inventory">¿Qué deseas llevar en tu mudanza?</p>
         </div>
         <p class="separate_inventory"></p>
         <div class="text text-center pt-1 pb-1">
-            <p class="text-muted conditions mx-2">Al hacer clic en "Registrarse", aceptas nuestras Condiciones, la Política de privacidad y la Política de cookies.</p>
+            <p class="text-muted conditions mx-2">En esta seccion, elige los articulos los cuales deseas llevar en tu mudanza, no te preocupes si agregas un articulo erroneo, lo podras elminar .</p>
         </div>
         <p class="separate_inventory"></p>
         <form  action="save_inventory.php" id="registroForm" method="POST">
@@ -121,15 +124,18 @@ $datosTabla = $obj->obtenerDatosTabla($email);
 
             <div class="article form-outline mb-2">
                 <label for="cantidad"></label>
-                <input type="number" name="CANTIDAD" id="cantidad" class="form-control input" placeholder="Cantidad" required>
+                <input type="number" name="CANTIDAD" id="cantidad" class="form-control input" placeholder="Cantidad" required min="1">
             </div>
             <div class="agregar text-center pt-1 pb-1">
-                <button class="mb-3 registrarse" type="submit">Agregar Artículo</button>
+                <button class="mb-3 registrarse" type="submit" id="loader_page">Agregar Artículo</button>
             </div>
         </form>
+        <div class="title_table row">
+            <p class="text_title_table">INVENTARIO</p>
+        </div>
         <div class="tabla_container">
-        <table class="table table-striped table-hover">
-            <thead>
+        <table class="table table-striped table-hover table-border">
+            <thead class="table-light">
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Tipo</th>
@@ -138,7 +144,7 @@ $datosTabla = $obj->obtenerDatosTabla($email);
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-group-divider">
                 <?php foreach ($datosTabla as $fila) : ?>
                     <tr>
                         <td><?php echo $fila['ID']; ?></td>
@@ -151,8 +157,11 @@ $datosTabla = $obj->obtenerDatosTabla($email);
             </tbody>
         </table>
         </div>
+        <div class="caption text-center">
+            <div class="text-muted mx-2">Lista de tu inventario, recuerda añadir todo lo que llevaras en tu mudanza</div>
+        </div>
         <div class="agregar text-center pt-1 pb-1">
-            <a class="btn next" href="location.php">Siguente paso</a>
+            <a class="btn next" href="location.php" id="loader_page">Siguente paso</a>
         </div>
     </div>
 <?php

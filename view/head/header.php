@@ -24,8 +24,8 @@
                            
                         </li>
                     </ul>
-                    <a href="login.php" class="boton">Inicia Session</a>
-                    <a href="signup.php" class="boton">Registrate</a>
+                    <a href="login.php" class="boton" id="loader_page">Inicia Session</a>
+                    <a href="signup.php" class="boton" id="loader_page">Registrate</a>
                 </div>
                 <?php else: ?>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -40,7 +40,7 @@
                             
                         </li>
                     </ul>
-                    <a href="logout.php" class="boton">Cerrar Sesion</a>
+                    <a href="logout.php" class="boton" id="loader_page">Cerrar Sesion</a>
                 </div>
                 <?php endif ?>
 

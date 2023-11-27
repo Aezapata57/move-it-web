@@ -62,6 +62,7 @@
 .service{
     color: #8772B1;
     font-size: 25px;
+    cursor: pointer;
 }
 
 .session-col{
@@ -207,4 +208,16 @@
 .text-option{
     margin-top: 8px;
     font-size: 12px;
+}
+
+.text-modal{
+    font-family: 'Lexend Giga', sans-serif;
+}
+
+.alert{
+    margin: 0 auto;
+    display: fixed;
+    width: 850px;
+    margin-top: 10px;
+    align-items: center;
 }

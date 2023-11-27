@@ -40,6 +40,11 @@
                                     </div>
                                     <label for="PASSWORD" class="form-label"></label>
                                 </div>
+                                <?php if(!empty($_GET['message'])):?>
+                                    <div id="alertMessage" style="margin: auto;" class="alert alert-success mb-2" role="alert">
+                                        <?= !empty($_GET['message']) ? $_GET['message'] : ""?>
+                                    </div>
+                                <?php endif;?>
                                 <?php if(!empty($_GET['error'])):?>
                                     <div id="alertError" style="margin: auto;" class="alert alert-danger mb-2" role="alert">
                                         <?= !empty($_GET['error']) ? $_GET['error'] : ""?>

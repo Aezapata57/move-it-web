@@ -9,8 +9,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
         <link href="asset/css/index.css" rel="stylesheet">
+        <meta http-equiv="X-frame-Options" content="DENY">
+        <script src="asset/js/main.js"></script>
 </head>
 <body>
+<div class="overlay" id="overlay">
+    <div class="loader"></div>
+</div>
 <div class="container-fluid">
     <div class="row section-1">
         <div class="col-5">

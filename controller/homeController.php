@@ -119,6 +119,57 @@
             $this->MODEL->eliminarArticulo($id, $email);
         }
 
+        public function tablaExiste($email){
+            $result = $this->MODEL->tablaExiste($email);
+            return $result;
+        }
+
+
+
+        public function verificarDireccionEmail($email){
+            $result = $this->MODEL->verificarDireccionEmail($email);
+            return $result;
+        }
+
+        public function recogerOrigen($email){
+            $result = $this->MODEL->recogerOrigen($email);
+            return $result;
+        }
+
+        public function recogerDestino($email){
+            $result = $this->MODEL->recogerDestino($email);
+            return $result;
+        }
+
+        public function recogerFecha($email){
+            $result = $this->MODEL->recogerFecha($email);
+            return $result;
+        }
+
+        public function recogerHora($email){
+            $result = $this->MODEL->recogerHora($email);
+            return $result;
+        }
+
+        public function guardarDirecciones($email, $origen, $destino, $fecha, $hora, $verificado){
+           $result = $this->MODEL->guardarDirecciones($email, $origen, $destino, $fecha, $hora, $verificado); 
+           return $result;
+        }
+
+        public function actualizarDirecciones($email, $origen, $destino){
+            $result = $this->MODEL->actualizarDirecciones($email, $origen, $destino); 
+            return $result;
+        }
+    
+        public function guardarFechaHora($email, $fecha, $hora){
+            $result = $this->MODEL->guardarFechaHora($email, $fecha, $hora); 
+            return $result;
+         }
+
+
+        public function traerArticulos($email){
+            return $this->MODEL->traerArticulos($email);
+        }
 
 
 

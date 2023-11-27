@@ -17,6 +17,7 @@
 
 .logo-col{
     width: 350px;
+    text-decoration: none;
 }
 
 .logo-text{
@@ -260,6 +261,18 @@
     font-size: 13px;
 }
 
+.caption{
+    font-size: 13px;
+    margin: 0 auto;
+    display: fixed;
+    width: 850px;
+    align-items: center;
+    text-align: justify;
+    text-decoration: none;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+}
+
 .new-login-1{
     left: 149px;
     top: 748px;
@@ -334,7 +347,51 @@
     font-weight: bold;
 }
 
+.title_date{
+    margin: 0 auto;
+    display: fixed;
+    width: 550px;
+    margin-top: 10px;
+}
+
+.text_title_date{
+    font-family: 'Lexend Giga', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.title_table{
+    margin: 0 auto;
+    display: fixed;
+    width: 550px;
+    margin-top: 10px;
+    align-items: center;
+    text-align: center;
+}
+
+.text_title_table{
+    font-family: 'Lexend Giga', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+}
+
 .agregar{
+    margin: 0 auto;
+    display: fixed;
+    width: 550px;
+    margin-top: 20px;
+    align-items: center;
+    text-align: center;
+}
+
+.step{
+    margin: 0 auto;
+    display: fixed;
+    align-items: center;
+    text-align: center;
+}
+
+.step-container{
     margin: 0 auto;
     display: fixed;
     width: 550px;
@@ -355,7 +412,7 @@
 .tabla_container{
     margin: 0 auto;
     display: fixed;
-    width: 850px;
+    width: 550px;
     margin-top: 10px;
     align-items: center;
     text-align: center;
@@ -371,3 +428,12 @@
     align-items: center;
     text-align: center;
 }
+
+.alert{
+    margin: 0 auto;
+    display: fixed;
+    width: 550px;
+    margin-top: 10px;
+    align-items: center;
+}
+

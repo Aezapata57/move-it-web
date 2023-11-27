@@ -1,5 +1,5 @@
 <?php
-    require_once("../head/header_client.php");
+    require_once("../head/header_client_home.php");
     require_once("../../controller/homeController.php");
 
     $obj = new homeController();
@@ -25,6 +25,11 @@
 <body>
 <div class="container-fluid">
     <h1 class="text-center mt-4 mb-5">Bienvenido <?= $_SESSION['datas']?></h1>
+    <?php if(!empty($_GET['message'])):?>
+        <div id="alertMessage" class="alert alert-success mb-2" role="alert">
+            <?= !empty($_GET['message']) ? $_GET['message'] : ""?>
+        </div>
+    <?php endif;?>
 </div>   
 </body>
 <?php

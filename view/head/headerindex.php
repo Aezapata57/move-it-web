@@ -21,21 +21,21 @@
                 <?php if(empty($_SESSION['datas'])): ?>
                     <div class="row session">
                         <div class="col login">
-                            <a href="view/user/login.php" class="login-a">Iniciar sesión</a>
+                            <a href="view/user/login.php" class="login-a" id="loader_page">Iniciar sesión</a>
                         </div>
                         <div class="col-2 separate"></div>
                         <div class="col register">
-                            <a href="view/user/signup.php" class="register-a">Registrarse</a>
+                            <a href="view/user/signup.php" class="register-a" id="loader_page">Registrarse</a>
                         </div>
                     </div>
                 <?php else: ?>
                     <div class="row session">
                         <div class="col login">
-                            <a href="view/client/panel_control_client.php" class="home-a">Ir al inicio</a>
+                            <a href="view/client/panel_control_client.php" class="home-a" id="loader_page">Ir al inicio</a>
                         </div>
                         <div class="col-2 separate"></div>
                         <div class="col register">
-                            <a href="view/user/logout.php" class="logout-a">Cerrar Sesion</a>
+                            <a href="view/user/logout.php" class="logout-a" id="loader_page">Cerrar Sesion</a>
                         </div>
                     </div>
                 <?php endif; ?>
