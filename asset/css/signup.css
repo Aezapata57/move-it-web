@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka&family=Lexend+Giga&family=Poppins&display=swap');
+
+.home{
+    text-decoration: none;
+}
+.logo-text{
+    margin-top: 20px;
+    margin-left: 70px;
+    margin-bottom: 30px;
+    text-align: center;
+    
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: 0.325em;
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+    }
+    
+.logo{
+    width: 87px;
+    height: 54px;
+    background: url(../image/logo.svg) no-repeat;
+    cursor: pointer;
+}
+.logo-text:hover{
+    transform: scale(1.05);
+    cursor: pointer;
+    color: #000000;
+}
+.container-1{
+    background-color: #e7dbff88;
+    padding: 20px;
+}
+.container-2{
+    background-color: #dbc8ffa2;
+    padding: 20px;
+}
+
+.gradient {
+    background: linear-gradient(to right, #cec3e0, #8772B1);
+}
+
+.input{
+    background-color: #bbbbbb9c;
+    border-radius: 0px;
+    height: 50px;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 25px;
+    letter-spacing: 0.10em;
+    padding-left: 30px;
+}
+
+.CC{
+    background-color: #bbbbbb9c;
+    border-radius: 0px;
+    height: 50px;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 25px;
+    letter-spacing: 0.10em;
+    padding-left: 15px;
+    padding-top: 12px;
+    color: #6918B4;
+}
+
+.separate{
+    width: auto;
+    height: 50px;
+    background: #a591ce;
+    padding: 1px;
+}
+
+.registrarse{
+    background: linear-gradient(to right, #bca7df, #8772B1);
+    border-radius: 0px;
+    width: 100%;
+    height: 50px;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 25px;
+    letter-spacing: 0.10em;
+    border: 0px;
+
+    color: #000000;
+}
+.registrarse:hover{
+    background: linear-gradient(to right, #8772B1, #bca7df);
+}
+
+.conditions{
+    text-align: justify;
+    text-decoration: none;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+    font-size: 13px;
+}
+
+.new-login-1{
+    left: 149px;
+    top: 748px;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 25px;
+    color: #000000;
+}
+
+.new-login-2{
+    left: 149px;
+    top: 748px;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 25px;
+    color:#6918B4;
+    text-decoration: none;
+}
+
+.new-login-2:hover{
+    left: 149px;
+    top: 748px;
+    font-family: 'Lexend Giga', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 25px;
+    color:#440f75;
+    text-decoration: none;
+}
+
+.error{
+    margin-top: -25px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}

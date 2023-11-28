@@ -1,0 +1,188 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.fondo{
+    min-height: 100vh;
+}
+.fondo_menu{
+    background-color: #212529;
+}
+.boton{
+    color: white;
+    border: 1px solid white;
+    margin-left: 15px;
+    text-decoration: none;
+    padding: 6px 8px;
+    border-radius: 8px;
+    transition: .2s;
+}
+.boton:hover{
+    border: 1px solid gray;
+    color: gray;
+}
+.fondo-login{
+    background-color: rgba(0, 0, 0, 0.938);
+    min-height: 100vh;
+    padding-top: 50px;
+}
+.login{
+    color: white;
+    margin: auto;
+    border: 1px solid gray;
+    padding: 20px;
+    border-radius: 6px;
+    background-color: rgb(51, 47, 47);
+}
+.icon, .titulo{
+    text-align: center;
+    color: white;
+}
+.titulo{
+    margin-bottom: 12px;
+}
+.icon .dog-icon{
+    font-size: 50px;
+    margin-bottom: 10px;
+    color: white;
+}
+.box-eye{
+    position: relative;
+}
+.box-eye button{
+    border: none;
+    position: absolute;
+}
+.changePassword{
+    position: absolute;
+    top: -36px;
+    left: 400px;
+    color: #001696;
+    cursor: pointer;
+}
+.btn-Inicio_sesion{
+    background-color: #001696;
+    color:#FFF;
+    border-color: #001696;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+.btn-contact{
+    background-color: #1e9600;
+    color:#FFF;
+    border-color: #1e9600;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+.btn.lg{
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.bodyLogin{
+    background-image:url(../image/Fondo.jpg);
+    background-size: 100% ;
+}
+
+.bodyRegister{
+    background-image: url(../image/Fondo.jpg);
+    background-size: 100% 100%;
+}
+.bg-form{
+    background-color: #FFF;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border: solid #001696 5px;
+}
+
+.form-floating input{
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.form-check{
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.form-select{
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    height: 89%;
+}
+
+.bg{
+    background-image: url(../image/Background.png);
+    background-size: 100% 100%;
+    background-position: center center;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    margin-bottom: 18px;
+    margin-top: 18px;
+    margin-right: 18px; 
+}
+
+.bg2{
+    background-image: url(../image/BackgroundRecover.png);
+    background-size: 100% 100%;
+    background-position: center center;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    margin-bottom: 18px;
+    margin-top: 18px;
+    margin-right: 18px; 
+}
+
+.container-fluid{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+/* Estilos CSS para el overlay y el círculo de carga */
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo opaco */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Asegura que esté por encima de todo */
+}
+
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    margin: auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.logo-col{
+    text-decoration: none;
+}
